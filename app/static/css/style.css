@@ -1,0 +1,22 @@
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; padding: 1rem; background: #f5f6f8; color: #222; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+a { text-decoration: none; }
+.card { background: #fff; border-radius: 8px; padding: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.login-card { max-width: 380px; margin: 3rem auto; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-form { display: grid; grid-template-columns: repeat(6, minmax(100px, 1fr)); gap: .5rem; margin-bottom: .75rem; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin: .75rem 0; }
+input, button, select { padding: .5rem; margin: .25rem 0; }
+table { width: 100%; border-collapse: collapse; margin-top: .75rem; }
+th, td { border: 1px solid #ddd; padding: .4rem; }
+.receipt { background: #111; color: #9be29b; padding: .7rem; min-height: 180px; white-space: pre-wrap; }
+.hint { color: #666; font-size: .9rem; }
+@media (max-width: 900px) {
+  .grid-2, .grid-form, .summary-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  body * { visibility: hidden; }
+  .receipt, .receipt * { visibility: visible; }
+  .receipt { position: absolute; left: 0; top: 0; width: 280px; background: white; color: black; }
+}

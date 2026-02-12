@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventory</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<header>
+  <h1>Inventory Management</h1>
+  <nav><a href="/cashier">Cashier</a> | <a href="/reports">Reports</a></nav>
+</header>
+<main class="card">
+  <h2>Products</h2>
+  <form id="product-form" class="grid-form">
+    <input name="barcode" placeholder="Barcode" required />
+    <input name="name" placeholder="Product Name" required />
+    <input name="cost_price" type="number" placeholder="Cost" step="0.01" required />
+    <input name="selling_price" type="number" placeholder="Sell Price" step="0.01" required />
+    <input name="stock_qty" type="number" placeholder="Stock" min="0" required />
+    <button type="submit">Save Product</button>
+  </form>
+  <input id="search" placeholder="Search barcode/name" />
+  <table id="products-table">
+    <thead><tr><th>Barcode</th><th>Name</th><th>Cost</th><th>Price</th><th>Stock</th><th>Action</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</main>
+<script src="/static/js/inventory.js"></script>
+</body>
+</html>

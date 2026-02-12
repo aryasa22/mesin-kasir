@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<header>
+  <h1>Sales Dashboard</h1>
+  <nav><a href="/cashier">Cashier</a> | <a href="/inventory">Inventory</a></nav>
+</header>
+<main class="card">
+  <label>Period
+    <select id="period">
+      <option value="daily">Daily</option>
+      <option value="monthly">Monthly</option>
+    </select>
+  </label>
+  <button id="load-report">Load Report</button>
+
+  <div class="summary-grid">
+    <div><h3>Transactions</h3><p id="sum-tx">0</p></div>
+    <div><h3>Revenue</h3><p id="sum-rev">0</p></div>
+    <div><h3>Cost</h3><p id="sum-cost">0</p></div>
+    <div><h3>Gross Profit</h3><p id="sum-profit">0</p></div>
+  </div>
+
+  <table id="report-table">
+    <thead><tr><th>Bucket</th><th>Transactions</th><th>Revenue</th><th>Cost</th><th>Profit</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</main>
+<script src="/static/js/reports.js"></script>
+</body>
+</html>
