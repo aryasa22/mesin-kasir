@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cashier POS</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+<header>
+  <h1>{{ store_name }} - Cashier</h1>
+  <nav><a href="/inventory">Inventory</a> | <a href="/reports">Reports</a></nav>
+</header>
+<main class="grid-2">
+  <section class="card">
+    <h2>Scan Barcode</h2>
+    <input id="barcode-input" placeholder="Scan or type barcode" autofocus />
+    <button id="add-barcode">Add Product</button>
+    <p class="hint">Shortcut: Enter to add barcode, Ctrl+Enter to checkout</p>
+    <table id="cart-table">
+      <thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+  <section class="card">
+    <h2>Checkout</h2>
+    <p>Total: <strong id="total">0</strong></p>
+    <label>Payment <input id="payment" type="number" min="0" step="0.01" /></label>
+    <p>Change: <strong id="change">0</strong></p>
+    <button id="checkout">Complete Transaction</button>
+    <pre id="receipt" class="receipt"></pre>
+    <div class="print-actions">
+      <button id="print-receipt">Print (Browser)</button>
+      <button id="print-thermal">Print Thermal (ESC/POS)</button>
+    </div>
+  </section>
+</main>
+<script>window.POS_STORE_NAME = {{ store_name|tojson }};</script>
+<script src="/static/js/cashier.js"></script>
+</body>
+</html>
