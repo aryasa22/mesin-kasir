@@ -3,7 +3,6 @@ if (!token) window.location.href = "/";
 
 const auth = { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
 const cart = [];
-let lastTransactionId = null;
 
 const barcodeInput = document.getElementById("barcode-input");
 const tbody = document.querySelector("#cart-table tbody");
@@ -80,7 +79,6 @@ document.getElementById("checkout").addEventListener("click", async () => {
   const data = await res.json();
   if (!res.ok) return alert(data.detail || "Checkout failed");
 
-  lastTransactionId = data.id;
   const lines = [
     window.POS_STORE_NAME,
     `Invoice: ${data.invoice_no}`,
@@ -99,18 +97,3 @@ document.getElementById("checkout").addEventListener("click", async () => {
 });
 
 document.getElementById("print-receipt").addEventListener("click", () => window.print());
-
-document.getElementById("print-thermal").addEventListener("click", async () => {
-  if (!lastTransactionId) {
-    alert("Complete a transaction first");
-    return;
-  }
-
-  const res = await fetch(`/api/transactions/${lastTransactionId}/print`, { method: "POST", headers: auth });
-  const data = await res.json();
-  if (!res.ok) {
-    alert(data.detail || "Thermal print failed");
-    return;
-  }
-  alert(data.message || "Sent to thermal printer");
-});

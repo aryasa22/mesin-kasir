@@ -113,7 +113,6 @@ CREATE TABLE transaction_items (
 ### Transactions
 - `POST /api/transactions`
 - `GET /api/transactions/{transaction_id}`
-- `POST /api/transactions/{transaction_id}/print` (direct ESC/POS thermal print)
 
 ### Reports
 - `GET /api/reports/summary?period=daily|monthly` (admin)
@@ -135,18 +134,10 @@ product.stock_qty = updates["stock_qty"]
 ```
 
 ### C. Printing receipt
-Browser print:
 ```javascript
 document.getElementById("print-receipt").addEventListener("click", () => window.print());
 ```
-Direct thermal print (ESC/POS):
-```python
-@router.post("/{transaction_id}/print")
-def print_receipt(transaction_id: int, ...):
-    transaction = db.query(Transaction).filter(Transaction.id == transaction_id).first()
-    print_transaction_receipt(transaction)
-```
-Receipt body is rendered in `<pre id="receipt">` after successful checkout and can be sent directly to thermal printer using `escpos.printer`.
+Receipt body is rendered in `<pre id="receipt">` after successful checkout.
 
 ### D. Generating profit/loss report
 ```sql
@@ -175,15 +166,6 @@ WHERE DATE(t.created_at) = CURRENT_DATE;
    DATABASE_URL=postgresql+psycopg2://postgres:postgres@localhost:5432/mesin_kasir
    SECRET_KEY=replace-with-random-secret
    STORE_NAME=My POS Store
-
-   # Thermal printer via escpos.printer
-   PRINTER_MODE=network
-   PRINTER_NETWORK_HOST=127.0.0.1
-   PRINTER_NETWORK_PORT=9100
-   # For USB mode:
-   # PRINTER_MODE=usb
-   # PRINTER_USB_VENDOR_ID=1208
-   # PRINTER_USB_PRODUCT_ID=514
    ```
 3. Install dependencies:
    ```bash
